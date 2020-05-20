@@ -16,3 +16,7 @@
 * 定义协程的方法：<br> 1.`from tornado.gen import coroutine`&nbsp;使用装饰器`@coroutine`将函数装饰成协程，这种方法实际是利用了生成器的特点，使函数变成协程 <br>2. 直接使用`async def xxx`, 原生协程，**推荐**使用这种, 使用`await`获取协程的值
 * run_sync 方法可以在运行某个协程之后停止事件循环
 * `tornado.queue` 是非阻塞的队列
+
+## web of tornado
+`web.RequestHandler` 处理每个url的类要继承这个类<br>
+客户端发起不同的请求时，只需重写这个类的方法即可，例如：post、delete、put、patch
