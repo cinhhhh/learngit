@@ -18,5 +18,33 @@
 * `tornado.queue` 是非阻塞的队列
 
 ## web of tornado
-`web.RequestHandler` 处理每个url的类要继承这个类<br>
+
+
+### tornado不能用同步IO
+### url配置
+`urls[()]` tornado会自动转成这个对象 `tornado.web.URLSpec`
+### define options
+`define`定义在命令行传递的参数以及类型
+`options` 全局只有一个options,不需要实例化
+### requestHandler（是一个长连接）
+
+* `web.RequestHandler` 处理每个url的类要继承这个类<br>
 客户端发起不同的请求时，只需重写这个类的方法即可，例如：post、delete、put、patch
+
+* 入口方法`_initialize`<br>
+* `prepare`真正调用请求之前的初始化方法，要在_initialize方法之前走这个接口
+* `on_finish`方法，类似于unittest中的setupclass
+####输入方法：
+* `get_argument()` 方法返回一个string类型<br>`get_arguments()`返回的是一个list类型，这个方法可以获取url中的餐参数和body中的参数<br>
+* `get_body_argument()`和`get_body_arguments()`可以获取json格式数据
+####输出
+* `set_status()`方法
+* 使用`write()`方法每调用一次，就会放到缓存区，不会断开连接，当所有的`write()`方法执行完，才会一并发送。如果需要断开连接，需要使用`finish()`方法，也可以返回数据，（如果发送的dict，会返回json格式数据）
+* `write_error`可以返回报错页面
+#### requestHandler的子类
+* 301永久重定向，http->https;&nbsp;302临时重定向
+* 重定向的方法：`RedirectHandler`和`self.redirect()`的区别：`RedirectHandler`是写在url中的，可以设置`permanent`参数（True永久重定向，Flase临时重定向）；`self.redirect()`是写在业务逻辑里的
+* `StaticFileHandler`，代理静态文件<br>`settings = {
+    "static_path":"C:/py_work/tornadoTest/web/tatic",
+    "static_url_prefix":"/static"
+}`
