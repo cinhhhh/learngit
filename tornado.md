@@ -48,3 +48,4 @@
     "static_path":"C:/py_work/tornadoTest/web/tatic",
     "static_url_prefix":"/static"
 }`
+### template
