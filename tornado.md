@@ -49,3 +49,9 @@
     "static_url_prefix":"/static"
 }`
 ### template
+## peewee（orm）
+* 优点：隔离数据库差异  便于维护 防sql注入  变量传递方便
+### 生成表
+* 要先，根据所需要的数据库类型，初始化数据库。例如：  `db = MySQLDatabase('message', host='127.0.0.1', port=3306, user='root', password='wait')`，
+* 建立model，`from peewee import Model` 自己创建的model要继承这个Model，`CharField()`的`index=Ture`参数可以对该字段建立索引（查询快速）
+* 生成表可以直接调用`db.create_tables([model_name])`
