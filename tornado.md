@@ -69,6 +69,5 @@
 | `model.select(model.property1, model.property2)` | select * from table |
 | `model.select().where(model.property1>100 )` | select * from table where property>100 |
 | `model.select().where(model.property1>100)&where(model.property2>200)`|where xxx and xxx|
-|
-`model.select().where(model.property1>100)|where(model.property2>200)`|where xxx or xxx|
+|`model.select().where(model.property1>100)|where(model.property2>200)`|where xxx or xxx|
 
