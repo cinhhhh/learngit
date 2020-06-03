@@ -51,7 +51,24 @@
 ### template
 ## peewee（orm）
 * 优点：隔离数据库差异  便于维护 防sql注入  变量传递方便
-### 生成表
+### 使用peewee生成表
 * 要先，根据所需要的数据库类型，初始化数据库。例如：  `db = MySQLDatabase('message', host='127.0.0.1', port=3306, user='root', password='wait')`，
 * 建立model，`from peewee import Model` 自己创建的model要继承这个Model，`CharField()`的`index=Ture`参数可以对该字段建立索引（查询快速）
 * 生成表可以直接调用`db.create_tables([model_name])`
+### 使用peewee保存数据
+实例化model后，直接调用`save()`方法
+### 使用peewee获取数据
+**获取单条数据**<br> 
+`get_by_id()`方法会立即执行sql语句，并返回model的实例对象  
+`get(model.property = xxx)`  
+**获取所有数据**  
+直接调用`model.select()`方法,返回的是modelselect对象，不会立即执行sql语句，而是当进入for循环才会执行，（迭代协议）  
+**根据条件获取**  
+| peewee语法 | 对应sql语法 | 
+| ------ | ------ | 
+| `model.select(model.property1, model.property2)` | select * from table |
+| `model.select().where(model.property1>100 )` | select * from table where property>100 |
+| `model.select().where(model.property1>100)&where(model.property2>200)`|where xxx and xxx|
+|
+`model.select().where(model.property1>100)|where(model.property2>200)`|where xxx or xxx|
+
