@@ -50,6 +50,8 @@
 }`
 ### template
 ## peewee（orm）
+[peewee官方文档地址](http://docs.peewee-orm.com/en/latest/index.html )  
+
 * 优点：隔离数据库差异  便于维护 防sql注入  变量传递方便
 ### 使用peewee生成表
 * 要先，根据所需要的数据库类型，初始化数据库。例如：  `db = MySQLDatabase('message', host='127.0.0.1', port=3306, user='root', password='wait')`，
@@ -70,4 +72,6 @@
 | `model.select().where(model.property1>100 )` | select * from table where property>100 |
 | `model.select().where(model.property1>100)&where(model.property2>200)`|where xxx and xxx|
 |`model.select().where(model.property1>100)|where(model.property2>200)`|where xxx or xxx|
+|`model.select().where(model.property.contains())` | where xxx like xxx |
+|`model.select().order_by(model.property.desc())`|order by|
 
