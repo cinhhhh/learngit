@@ -73,5 +73,14 @@
 | `model.select().where(model.property1>100)&where(model.property2>200)`|where xxx and xxx|
 |`model.select().where(model.property1>100)\|where(model.property2>200)`|where xxx or xxx|
 |`model.select().where(model.property.contains())` | where xxx like xxx |
-|`model.select().order_by(model.property.desc())`|order by|
+|`model.select().order_by(model.property.desc())`|order by|  
+**更新\删除数据**  
+| peewee语法 | 对应sql语法 | 
+| ------ | ------ | 
+|`model.update().where().execute()`| update xxx where xxx|  
+|`model.delete().where().execute()`| delete from table where xxx|
+
+## async_peewee
+
+
 
